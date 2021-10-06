@@ -2,6 +2,10 @@
 
 # Code taken from docs.opencv.org tutorials and adapted to
 # track different colors for use for Task 4 of Lab 1
+# The main tutorials referenced can be found here:
+# https://docs.opencv.org/3.0-beta/doc/py_tutorials/py_gui/py_video_display/py_video_display.html
+# https://docs.opencv.org/3.0-beta/doc/py_tutorials/py_imgproc/py_colorspaces/py_colorspaces.html#converting-colorspaces
+# https://docs.opencv.org/3.0-beta/doc/py_tutorials/py_imgproc/py_canny/py_canny.html#canny
 
 import numpy as np
 import cv2
