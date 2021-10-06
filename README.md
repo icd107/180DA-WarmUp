@@ -1,3 +1,5 @@
 180DA-WarmUp
 
-Repo for EC ENGR 180DA Lab 1
+Repository for EC ENGR 180DA Lab 1
+
+Vision processing: color recognition
