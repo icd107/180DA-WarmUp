@@ -28,7 +28,7 @@ client = mqtt.Client()
 # add additional client options (security, certifications, etc.)
 # many default options should be good to start off
 # add callbacks to client
-client.on_connect = on_disconnect
+client.on_connect = on_connect
 client.on_disconnect = on_disconnect
 client.on_message = on_message
 
