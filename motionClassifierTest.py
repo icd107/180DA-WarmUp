@@ -372,7 +372,7 @@ while True:
     if 1:
     	if AccXangle < lowerAccX and AccXangle > upperAccX:
     		print("Move forward")
-		elif AccYangle < lowerAccY and AccYangle > upperAccY:
+		if AccYangle < lowerAccY and AccYangle > upperAccY:
 			print("Lift up")
 
     #print(outputString)
