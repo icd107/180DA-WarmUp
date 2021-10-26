@@ -92,7 +92,7 @@ while t < 100000:
 	if 0:					   #Change to '0' to stop  showing the angles from the gyro
 		outputString +="\t# GRYX Angle %5.2f  GYRY Angle %5.2f  GYRZ Angle %5.2f # " % (GYRx,GYRy,GYRz)
 
-	print(outputString)
+	#print(outputString)
 
 	#slow program down a bit, makes the output more readable
 	time.sleep(0.05)
