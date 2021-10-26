@@ -46,10 +46,10 @@ KFangleY = 0.0
 
 
 # Threshold values
-upperAccX = 2.5
-lowerAccX = -2.5
-upperAccY = 2.5
-lowerAccY = -2.5
+upperAccX = 10
+lowerAccX = -10
+upperAccY = 10
+lowerAccY = -10
 
 	
 def kalmanFilterY ( accAngle, gyroRate, DT):
@@ -370,9 +370,9 @@ while True:
 		outputString +="# kalmanX %5.2f   kalmanY %5.2f #" % (kalmanX,kalmanY)
 
 	if 1:
-		if AccXangle < lowerAccX and AccXangle > upperAccX:
+		if AccXangle < lowerAccX or AccXangle > upperAccX:
 			print("Move forward")
-		if AccYangle < lowerAccY and AccYangle > upperAccY:
+		elif AccYangle < lowerAccY or AccYangle > upperAccY:
 			print("Lift up")
 
 	#print(outputString)
