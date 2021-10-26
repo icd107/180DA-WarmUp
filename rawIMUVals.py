@@ -7,10 +7,8 @@ import math
 import IMU
 import datetime
 import os
-import matplotlib.pyplot as plt
-import matplotlib.animation as animation
-from matplotlib import style
 import numpy as np
+import csv
 
 RAD_TO_DEG = 57.29578
 M_PI = 3.14159265358979323846
@@ -58,40 +56,46 @@ if(IMU.BerryIMUversion == 99):
 IMU.initIMU()	   #Initialise the accelerometer, gyroscope and compass
 
 
-# Live plot code
-fig = plt.figure()
-ax = fig.add_subplot(1,1,1)
+axs = []
+ays = []
 gxs = []
 gys = []
+gzs = []
 
 list_limit = 30
 
-
-def animate(i, gxs, gys):
-	GYRx = IMU.readGYRx()
-	GYRy = IMU.readGYRy()
-
-	gxs.append(GYRx)
-	gys.append(GYRy)
-
-	# Limit x and y lists to 20 items
-	gxs = gxs[-20:]
-	gys = gys[-20:]
-
-	# Draw x and y lists
-	ax.clear()
-	ax.plot(gxs)
-	ax.plot(gys)
-
-	plt.title("Gyroscope values over time")
-	plt.ylabel("Gyro value (raw)")
-
-
-#while True:
+t = 0
+while t < 100000:
 
 	#Read the accelerometer,gyroscope and magnetometer values
+	ACCx = IMU.readACCx()
+	ACCy = IMU.readACCy()
+	ACCz = IMU.readACCz()
+	GYRx = IMU.readGYRx()
+	GYRy = IMU.readGYRy()
+	GYRz = IMU.readGYRz()
+	MAGx = IMU.readMAGx()
+	MAGy = IMU.readMAGy()
+	MAGz = IMU.readMAGz()
 
-ani = animation.FuncAnimation(fig,animate,fargs=(gxs,gys),interval = 1000)
-plt.show()
+	axs.append(ACCx)
+	ays.append(ACCy)
+	gxs.append(GYRx)
+	gys.append(GYRy)
+	gzs.append(GYRz)
+
+	
+
+	if 0:					   #Change to '0' to stop showing the angles from the accelerometer
+		outputString += "#  ACCX Angle %5.2f ACCY Angle %5.2f  #  " % (ACCx, ACCy)
+
+	if 0:					   #Change to '0' to stop  showing the angles from the gyro
+		outputString +="\t# GRYX Angle %5.2f  GYRY Angle %5.2f  GYRZ Angle %5.2f # " % (GYRx,GYRy,GYRz)
+
+	print(outputString)
 
 	#slow program down a bit, makes the output more readable
+	time.sleep(0.05)
+	t += 1
+
+np.savetxt('data.csv', (axs,ays,gxs,gys,gzs), delimiter=',')
