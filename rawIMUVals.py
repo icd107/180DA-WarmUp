@@ -7,6 +7,10 @@ import math
 import IMU
 import datetime
 import os
+import matplotlib.pyplot as plt
+import matplotlib.animation as animation
+from matplotlib import style
+import numpy as np
 
 RAD_TO_DEG = 57.29578
 M_PI = 3.14159265358979323846
@@ -54,26 +58,40 @@ if(IMU.BerryIMUversion == 99):
 IMU.initIMU()	   #Initialise the accelerometer, gyroscope and compass
 
 
-while True:
+# Live plot code
+fig = plt.figure()
+ax = fig.add_subplot(1,1,1)
+gxs = []
+gys = []
 
-	#Read the accelerometer,gyroscope and magnetometer values
-	ACCx = IMU.readACCx()
-	ACCy = IMU.readACCy()
-	ACCz = IMU.readACCz()
+list_limit = 30
+
+
+def animate(i, gxs, gys):
 	GYRx = IMU.readGYRx()
 	GYRy = IMU.readGYRy()
-	GYRz = IMU.readGYRz()
-	MAGx = IMU.readMAGx()
-	MAGy = IMU.readMAGy()
-	MAGz = IMU.readMAGz()
 
-	if 1:					   #Change to '0' to stop showing the angles from the accelerometer
-		outputString += "#  ACCX Angle %5.2f ACCY Angle %5.2f  #  " % (ACCx, ACCy)
+	gxs.append(GYRx)
+	gys.append(GYRy)
 
-	if 1:					   #Change to '0' to stop  showing the angles from the gyro
-		outputString +="\t# GRYX Angle %5.2f  GYRY Angle %5.2f  GYRZ Angle %5.2f # " % (GYRx,GYRy,GYRz)
+	# Limit x and y lists to 20 items
+	gxs = gxs[-20:]
+	gys = gys[-20:]
 
-	print(outputString)
+	# Draw x and y lists
+	ax.clear()
+	ax.plot(gxs)
+	ax.plot(gys)
+
+	plt.title("Gyroscope values over time")
+	plt.ylabel("Gyro value (raw)")
+
+
+#while True:
+
+	#Read the accelerometer,gyroscope and magnetometer values
+
+ani = animation.FuncAnimation(fig,animate,fargs=(gxs,gys),interval = 1000)
+plt.show()
 
 	#slow program down a bit, makes the output more readable
-	time.sleep(0.03)
