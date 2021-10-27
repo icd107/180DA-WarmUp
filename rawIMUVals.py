@@ -101,3 +101,4 @@ while t < 10000:
 print("Data collected, writing to data.csv")
 np.savetxt('data.csv', (axs,ays,gxs,gys,gzs), delimiter=',')
 print("File saved")
+# Sample length is 0.05*10000 seconds, 500 seconds
