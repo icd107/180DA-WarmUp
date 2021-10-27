@@ -98,4 +98,6 @@ while t < 100:
 	time.sleep(0.05)
 	t += 1
 
+print("Data collected, writing to data.csv")
 np.savetxt('data.csv', (axs,ays,gxs,gys,gzs), delimiter=',')
+print("File saved")
