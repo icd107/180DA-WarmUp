@@ -58,6 +58,7 @@ IMU.initIMU()	   #Initialise the accelerometer, gyroscope and compass
 
 axs = []
 ays = []
+axz = []
 gxs = []
 gys = []
 gzs = []
@@ -65,7 +66,8 @@ gzs = []
 list_limit = 30
 
 t = 0
-while t < 10000:
+# one minute
+while t < 1200:
 
 	#Read the accelerometer,gyroscope and magnetometer values
 	ACCx = IMU.readACCx()
@@ -80,6 +82,7 @@ while t < 10000:
 
 	axs.append(ACCx)
 	ays.append(ACCy)
+	axz.append(ACCz)
 	gxs.append(GYRx)
 	gys.append(GYRy)
 	gzs.append(GYRz)
@@ -99,6 +102,7 @@ while t < 10000:
 	t += 1
 
 print("Data collected, writing to data.csv")
-np.savetxt('data.csv', (axs,ays,gxs,gys,gzs), delimiter=',')
+data = np.matrix((axs,ays,axz,gxs,gys,gzs)).T
+np.savetxt('data.csv', data, delimiter=',')
 print("File saved")
 # Sample length is 0.05*10000 seconds, 500 seconds
