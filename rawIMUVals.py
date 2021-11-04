@@ -66,8 +66,8 @@ gzs = []
 list_limit = 30
 
 t = 0
-# one minute
-while t < 1200:
+# one minute: 1200
+while t < 600:
 
 	#Read the accelerometer,gyroscope and magnetometer values
 	ACCx = IMU.readACCx()
